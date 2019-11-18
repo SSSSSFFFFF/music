@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import Header from './Header';
 import * as serviceWorker from './serviceWorker';
+
+class App extends Component {
+    render() {
+        return (
+            <div>
+                <Header/>
+                {/* <div className='header'>
+                    <Search />
+                </div> */}
+            </div>
+        )
+    }
+}
+
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
