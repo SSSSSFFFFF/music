@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './index.css';
 import './Header.css';
+// const request = require('request');
 class MV extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.state = {
             mvUrl: '',
             
@@ -14,7 +14,6 @@ class MV extends Component {
         fetch('http://139.196.102.62:3000/mv/URl?id=' + this.props.mvid).then(res => {
                 return res.json()
             }).then(res => {
-                console.log(res)
                 this.setState({
                     mvUrl: res.data.url,
                 })
@@ -37,27 +36,22 @@ class Header extends Component {
         };
     }
     inputChange(e) {
-        // console.log(e.target.value)
         this.setState({
             inputValue: e.target.value,
         })
        
     }
     fetchApi(inputValue){
-        console.log(inputValue)
         fetch('http://139.196.102.62:3000/search?keywords=' + inputValue).then(res => {
             return res.json()
         }).then(res => {
-            console.log(res.result)
             this.setState({
                 search: res.result,
             })
         })
     }
     toSearch(words){
-        console.log(typeof(words))
-        console.log(this.state.inputValue);
-        if (this.state.inputValue && typeof (words) != 'string'){
+        if (this.state.inputValue && typeof (words) !== 'string'){
             this.fetchApi(this.state.inputValue)
         } else if (typeof (words) == 'string'){
             this.fetchApi(words)
@@ -73,7 +67,6 @@ class Header extends Component {
         if (this.state.search) {
             console.log(this.state.search.songs)
             this.state.search.songs.forEach(i => {
-                console.log(i.mvid);
                 result.push(
                     <div className='flex' key={i.id}>
                         <div>
@@ -82,7 +75,7 @@ class Header extends Component {
                         <div>
                             {i.artists[0].name}
                         </div>
-                        {i.mvid != 0 ? <MV mvid={i.mvid}/> : ''}
+                        {i.mvid !== 0 ? <MV mvid={i.mvid}/> : ''}
                     </div>
                 )
             });
