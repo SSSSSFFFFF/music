@@ -14,7 +14,10 @@ code {
   height: 50px;
 }
 
-
 .flex {
   display: flex;
+}
+
+.ant-layout {
+  height: 100vh;
 }

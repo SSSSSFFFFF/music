@@ -4,17 +4,35 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Header from './Header';
+import { Headers, SearchInput } from './Headers';
 import Login from './Login';
 import * as serviceWorker from './serviceWorker';
-import { Button } from 'antd';
+import { Layout } from 'antd';
+
 class App extends Component {
+    
     render() {
+        const { Header, Footer, Sider, Content } = Layout;
         return (
             <div>
-                <Button type="primary">Button</Button>
+                <Layout>
+                        
+                    <Layout>
+                        <Header>
+                            <SearchInput/>
+                        </Header>
+                        <Layout>
+                            <Sider>Sider</Sider>
+                            <Content>
+                                <Headers />
+                            </Content>
+                        </Layout>
+                        <Footer>Footer</Footer>
+                    </Layout>
+
+                </Layout>
                 <Login/>
-                <Header/>
+               
                 {/* <div className='header'>
                     <Search />
                 </div> */}
@@ -25,7 +43,9 @@ class App extends Component {
 
 
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+    <App />
+, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

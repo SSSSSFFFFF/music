@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './index.css';
-import './Header.css';
+import './Headers.css';
+
 // const request = require('request');
 class MV extends Component {
     constructor(props) {
@@ -27,7 +28,7 @@ class MV extends Component {
         )
     }
 }
-class Header extends Component {
+class SearchInput extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -39,8 +40,43 @@ class Header extends Component {
         this.setState({
             inputValue: e.target.value,
         })
-       
+
     }
+    fetchApi(inputValue) {
+        fetch('http://139.196.102.62:3000/search?keywords=' + inputValue).then(res => {
+            return res.json()
+        }).then(res => {
+            console.log(res.result)
+            this.setState({
+                search: res.result,
+            })
+        })
+    }
+    toSearch(words) {
+        if (this.state.inputValue && typeof (words) !== 'string') {
+            this.fetchApi(this.state.inputValue)
+        } else if (typeof (words) == 'string') {
+            this.fetchApi(words)
+        }
+    }
+    render() {
+        return (
+            <div>
+                <input type="text" onChange={this.inputChange.bind(this)} placeholder='五月天' />
+                <button onClick={this.toSearch.bind(this)}>搜索</button>
+            </div>
+        );
+    }
+}
+class Headers extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            search: '',
+            inputValue: '',
+        };
+    }
+    
     fetchApi(inputValue){
         fetch('http://139.196.102.62:3000/search?keywords=' + inputValue).then(res => {
             return res.json()
@@ -61,8 +97,6 @@ class Header extends Component {
         this.toSearch('五月天')
     }
     render() {
-
-        
         let result = []
         if (this.state.search) {
             console.log(this.state.search.songs)
@@ -85,17 +119,13 @@ class Header extends Component {
 
         return (
             <div>
-                <div>
-                    <input type="text" onChange ={this.inputChange.bind(this)} placeholder='五月天'/>
+                {/* <div>
+                    <input type="text" onChange={this.inputChange.bind(this)} placeholder='五月天' />
                     <button onClick={this.toSearch.bind(this)}>搜索</button>
-                </div>
-
-                <div>
-                    {result}
-                </div>
+                </div> */}
+                {result}
             </div>
         )
     }
 }
-
-export default Header
+export { Headers, SearchInput}

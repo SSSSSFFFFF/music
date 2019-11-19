@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import host from './global'
-console.log(host);
+import { Button } from 'antd';
 // const request = require('request');
 class Login extends Component {
     constructor(props) {
@@ -12,7 +12,6 @@ class Login extends Component {
         };
     }
     loginApi(){
-        console.log(1);
         axios.get(host + '/login/cellphone', {
             params: {
                 phone: "18701701106",
@@ -29,10 +28,7 @@ class Login extends Component {
     render() {
         return (
              <div>
-                 <div onClick={this.loginApi}>
-                    登录
-                 </div>
-                 
+                <Button onClick={this.loginApi} type="primary">登录</Button>
              </div>
         );
     }
