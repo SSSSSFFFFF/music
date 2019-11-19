@@ -1,13 +1,19 @@
+
+
+
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Header from './Header';
+import Login from './Login';
 import * as serviceWorker from './serviceWorker';
-
+import { Button } from 'antd';
 class App extends Component {
     render() {
         return (
             <div>
+                <Button type="primary">Button</Button>
+                <Login/>
                 <Header/>
                 {/* <div className='header'>
                     <Search />
