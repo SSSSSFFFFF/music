@@ -50,7 +50,7 @@ class SearchInput extends Component {
 
     }
     fetchApi(inputValue) {
-        fetch('http://139.196.102.62:3000/search?keywords=' + inputValue).then(res => {
+        fetch('http://139.196.102.62:3000/search?keywords=' + inputValue+'&offset=0&limit=25').then(res => {
             return res.json()
         }).then(res => {
             console.log(res.result)
@@ -94,6 +94,7 @@ class Headers extends Component {
         fetch('http://139.196.102.62:3000/search?keywords=' + inputValue +'&offset=0&limit=25').then(res => {
             return res.json()
         }).then(res => {
+            console.log(res.result);
             this.setState({
                 search: res.result,
             })
@@ -124,6 +125,9 @@ class Headers extends Component {
                 <div className='artistsName '>
                     歌手
                 </div>
+                <div className='album'>
+                    专辑
+                </div>
             </div>
         ]
         
@@ -140,7 +144,9 @@ class Headers extends Component {
                         <div className='artistsName' title={i.artists[0].name}>
                             {i.artists[0].name}
                         </div>
-                        
+                        <div className='album' title={i.album.name}>
+                            {i.album.name}
+                        </div>
                     </div>
                 )
             });

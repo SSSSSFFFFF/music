@@ -9,11 +9,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-
 .flex {
   display: flex;
 }
 
 .ant-layout {
   height: 100vh;
+}
+
+.giMusicSpell {
+  color: white;
+  font-size: 30px;
+  transform: translate(-35px, 10px);
+}
+
+.appTitle {
+  color: white;
+  display: inline;
+  margin-left: -30px;
 }
