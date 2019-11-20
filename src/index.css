@@ -9,10 +9,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-.header {
-  background: #45a8ff;
-  height: 50px;
-}
 
 .flex {
   display: flex;

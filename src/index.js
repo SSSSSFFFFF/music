@@ -8,6 +8,10 @@ import { Headers, SearchInput } from './Headers';
 import Login from './Login';
 import * as serviceWorker from './serviceWorker';
 import { Layout } from 'antd';
+import counter from './reducers'
+
+import { createStore } from 'redux'
+const store = createStore(counter)
 
 class App extends Component {
     
@@ -19,7 +23,7 @@ class App extends Component {
                         
                     <Layout>
                         <Header>
-                            <SearchInput/>
+                            <SearchInput getResult={()=> store.dispatch({type:'?'})}/>
                         </Header>
                         <Layout>
                             <Sider>Sider</Sider>
@@ -31,7 +35,7 @@ class App extends Component {
                     </Layout>
 
                 </Layout>
-                <Login/>
+                {/* <Login/> */}
                
                 {/* <div className='header'>
                     <Search />
@@ -40,6 +44,7 @@ class App extends Component {
         )
     }
 }
+
 
 
 

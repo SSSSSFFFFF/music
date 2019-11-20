@@ -1,6 +1,10 @@
+import { Input, Icon, Pagination   } from 'antd';
 import React, { Component } from 'react';
 import './index.css';
 import './Headers.css';
+import counter from './reducers'
+import { createStore } from 'redux'
+const store = createStore(counter)
 
 // const request = require('request');
 class MV extends Component {
@@ -22,21 +26,24 @@ class MV extends Component {
     }
     render(){
         return (
-            <div>
-               <a href={this.state.mvUrl}>MV</a>
+            <div className='mv'>
+                <a href={this.state.mvUrl}><Icon type="video-camera" /></a>
             </div>
         )
     }
 }
 class SearchInput extends Component {
+    
     constructor(props) {
         super(props);
+        
         this.state = {
             search: '',
             inputValue: '',
         };
     }
     inputChange(e) {
+       
         this.setState({
             inputValue: e.target.value,
         })
@@ -47,27 +54,33 @@ class SearchInput extends Component {
             return res.json()
         }).then(res => {
             console.log(res.result)
+            store.dispatch({ type: res.result})
             this.setState({
                 search: res.result,
             })
         })
     }
     toSearch(words) {
-        if (this.state.inputValue && typeof (words) !== 'string') {
-            this.fetchApi(this.state.inputValue)
-        } else if (typeof (words) == 'string') {
+        console.log(words);
+        if (words) {
             this.fetchApi(words)
-        }
+        } 
     }
     render() {
+        const { Search } = Input;
         return (
             <div>
-                <input type="text" onChange={this.inputChange.bind(this)} placeholder='五月天' />
-                <button onClick={this.toSearch.bind(this)}>搜索</button>
+                <Search
+                    placeholder="五月天"
+                    onSearch={value => this.toSearch(value)}
+                    style={{ width: 200 }}
+                />
             </div>
         );
     }
 }
+
+
 class Headers extends Component {
     constructor(props) {
         super(props);
@@ -76,9 +89,9 @@ class Headers extends Component {
             inputValue: '',
         };
     }
-    
+   
     fetchApi(inputValue){
-        fetch('http://139.196.102.62:3000/search?keywords=' + inputValue).then(res => {
+        fetch('http://139.196.102.62:3000/search?keywords=' + inputValue +'&offset=0&limit=25').then(res => {
             return res.json()
         }).then(res => {
             this.setState({
@@ -87,29 +100,47 @@ class Headers extends Component {
         })
     }
     toSearch(words){
-        if (this.state.inputValue && typeof (words) !== 'string'){
-            this.fetchApi(this.state.inputValue)
-        } else if (typeof (words) == 'string'){
-            this.fetchApi(words)
-        }
+         this.fetchApi(words)
     }
     componentDidMount() {
         this.toSearch('五月天')
+        store.subscribe(listener);
+        var that = this;
+        function listener() {
+            // console.log(store.getState());
+            that.setState({
+                search: store.getState()
+            })
+        }
+        
     }
     render() {
-        let result = []
+        let result = [
+            <div className='flex musicHeader' key='1'>
+                <div className='musicName'>
+                    音乐标题
+                </div>
+                <div className='mv'></div>
+                <div className='artistsName '>
+                    歌手
+                </div>
+            </div>
+        ]
+        
         if (this.state.search) {
-            console.log(this.state.search.songs)
+            // console.log(this.state.search.songs)
             this.state.search.songs.forEach(i => {
                 result.push(
                     <div className='flex' key={i.id}>
-                        <div>
-                            <a href={'https://music.163.com/song/media/outer/url?id=' + i.id + '.mp3'}>{i.name}</a>
+                        <div className='musicName'>
+                            <a href={'https://music.163.com/song/media/outer/url?id=' + i.id + '.mp3'} title={i.name}>{i.name}</a>
+                            
                         </div>
-                        <div>
+                        {i.mvid !== 0 ? <MV mvid={i.mvid} /> : <div className='mv'></div>}
+                        <div className='artistsName' title={i.artists[0].name}>
                             {i.artists[0].name}
                         </div>
-                        {i.mvid !== 0 ? <MV mvid={i.mvid}/> : ''}
+                        
                     </div>
                 )
             });
@@ -124,6 +155,7 @@ class Headers extends Component {
                     <button onClick={this.toSearch.bind(this)}>搜索</button>
                 </div> */}
                 {result}
+                <Pagination className='searchPag' defaultCurrent={1} total={500} />
             </div>
         )
     }

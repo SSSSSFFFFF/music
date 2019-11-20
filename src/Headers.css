@@ -1,3 +1,60 @@
 .flex div {
-    margin: 0 10px 
+    margin: 0 10px
+}
+
+.ant-layout-header {
+    background: #222222;
+}
+
+.ant-layout-sider {
+    background: #f0f2f5;
+}
+
+.musicName, .artistsName {
+    width: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.artistsName {
+    width: 100px;
+}
+
+.flex {
+    padding: 2px 0;
+}
+
+.musicHeader {
+    padding: 6px 0;
+    border-bottom: 1px solid #aaaaaa;
+}
+
+.mv {
+    width: 10px;
+}
+
+.singerTitle {
+    margin-left: 20px!important;
+}
+
+.ant-layout-content {
+    position: relative;
+    font-size: 16px;
+}
+
+.searchPag {
+    position: absolute;
+    bottom: 0;
+}
+
+.ant-layout-header {
+    position: relative;
+}
+
+.ant-input-search {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 210px;
 }
