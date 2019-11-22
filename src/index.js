@@ -2,7 +2,7 @@ import { GiMusicSpell } from 'react-icons/gi';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { Headers, SearchInput } from './Headers';
+import { Headers, SearchInput } from './component/Headers';
 import Login from './Login';
 import * as serviceWorker from './serviceWorker';
 import { Layout } from 'antd';

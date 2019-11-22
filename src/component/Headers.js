@@ -1,8 +1,8 @@
 import { Input, Icon, Pagination   } from 'antd';
 import React, { Component } from 'react';
-import './index.css';
+import '../index.css';
 import './Headers.css';
-import counter from './reducers'
+import counter from '../reducers'
 import { createStore } from 'redux'
 const store = createStore(counter)
 
