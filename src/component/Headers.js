@@ -75,7 +75,7 @@ class SearchInput extends Component {
         return (
             <div>
                 <Search
-                    placeholder="五月天"
+                    placeholder="苏打绿"
                     onSearch={value => this.toSearch(value)}
                     style={{ width: 200 }}
                 />
@@ -90,17 +90,17 @@ class Headers extends Component {
         super(props);
         this.state = {
             search: '',
-            inputValue: '五月天',
+            inputValue: '苏打绿',
             total:0
         };
     }
    
     fetchApi(inputValue,page){
-        console.log(inputValue, page);
+        // console.log(inputValue, page);
         fetch('http://139.196.102.62:3000/search?keywords=' + inputValue + '&offset=' + page+'&limit=25').then(res => {
             return res.json()
         }).then(res => {
-            console.log(res.result);
+            // console.log(res.result);
             this.setState({
                 search: res.result,
                 total: res.result.songCount
@@ -111,11 +111,11 @@ class Headers extends Component {
          this.fetchApi(words,0)
     }
     componentDidMount() {
-        this.toSearch('五月天')
+        this.toSearch('苏打绿')
         store.subscribe(listener);
         var that = this;
         function listener() {
-            console.log(store.getState());
+            // console.log(store.getState());
             that.setState({
                 search: store.getState().type,
                 total: store.getState().type.songCount,
@@ -125,7 +125,7 @@ class Headers extends Component {
         
     }
     pageChange(page, pageSize){
-        console.log(page, pageSize);
+        // console.log(page, pageSize);
         this.fetchApi(this.state.inputValue, 25*(page-1))
     }
     render() {
@@ -170,7 +170,7 @@ class Headers extends Component {
         return (
             <div>
                 {/* <div>
-                    <input type="text" onChange={this.inputChange.bind(this)} placeholder='五月天' />
+                    <input type="text" onChange={this.inputChange.bind(this)} placeholder='苏打绿' />
                     <button onClick={this.toSearch.bind(this)}>搜索</button>
                 </div> */}
                 {result}

@@ -44,8 +44,7 @@
 }
 
 .searchPag {
-    position: absolute;
-    bottom: 0;
+    margin-top: 12px;
 }
 
 .ant-layout-header {
@@ -58,4 +57,3 @@
     transform: translateY(-50%);
     left: 210px;
 }
-

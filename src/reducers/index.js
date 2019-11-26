@@ -1,5 +1,4 @@
 export default (state, action) => {
-  console.log(action)
   state = action.type;
   return action
   // switch (action.type) {

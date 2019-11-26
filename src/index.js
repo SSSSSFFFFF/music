@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { Headers, SearchInput } from './component/Headers';
+import Player from './component/Player';
 import Login from './Login';
 import * as serviceWorker from './serviceWorker';
 import { Layout } from 'antd';
@@ -35,7 +36,9 @@ class App extends Component {
                                 <Headers />
                             </Content>
                         </Layout>
-                        <Footer>Footer</Footer>
+                        <Footer>
+                            <Player/>
+                        </Footer>
                     </Layout>
 
                 </Layout>
