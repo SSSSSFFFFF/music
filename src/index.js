@@ -27,6 +27,7 @@ class App extends Component {
                                 NeteaseCloudMusicApi
                             </div>
                             <SearchInput getResult={()=> store.dispatch({type:'?'})}/>
+                            <Login className="loginButton"/>
                         </Header>
                         <Layout>
                             <Sider>Sider</Sider>

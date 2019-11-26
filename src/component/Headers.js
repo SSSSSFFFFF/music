@@ -23,6 +23,7 @@ class MV extends Component {
                     mvUrl: res.data.url,
                 })
             })
+           
     }
     render(){
         return (
@@ -54,7 +55,10 @@ class SearchInput extends Component {
             return res.json()
         }).then(res => {
             console.log(res.result)
-            store.dispatch({ type: res.result})
+            store.dispatch({ 
+                type: res.result,
+                inputValue: inputValue
+            })
             this.setState({
                 search: res.result,
             })
@@ -86,34 +90,43 @@ class Headers extends Component {
         super(props);
         this.state = {
             search: '',
-            inputValue: '',
+            inputValue: '五月天',
+            total:0
         };
     }
    
-    fetchApi(inputValue){
-        fetch('http://139.196.102.62:3000/search?keywords=' + inputValue +'&offset=0&limit=25').then(res => {
+    fetchApi(inputValue,page){
+        console.log(inputValue, page);
+        fetch('http://139.196.102.62:3000/search?keywords=' + inputValue + '&offset=' + page+'&limit=25').then(res => {
             return res.json()
         }).then(res => {
             console.log(res.result);
             this.setState({
                 search: res.result,
+                total: res.result.songCount
             })
         })
     }
     toSearch(words){
-         this.fetchApi(words)
+         this.fetchApi(words,0)
     }
     componentDidMount() {
         this.toSearch('五月天')
         store.subscribe(listener);
         var that = this;
         function listener() {
-            // console.log(store.getState());
+            console.log(store.getState());
             that.setState({
-                search: store.getState()
+                search: store.getState().type,
+                total: store.getState().type.songCount,
+                inputValue: store.getState().inputValue
             })
         }
         
+    }
+    pageChange(page, pageSize){
+        console.log(page, pageSize);
+        this.fetchApi(this.state.inputValue, 25*(page-1))
     }
     render() {
         let result = [
@@ -132,7 +145,7 @@ class Headers extends Component {
         ]
         
         if (this.state.search) {
-            // console.log(this.state.search.songs)
+            console.log(this.state.search.songs)
             this.state.search.songs.forEach(i => {
                 result.push(
                     <div className='flex' key={i.id}>
@@ -161,7 +174,7 @@ class Headers extends Component {
                     <button onClick={this.toSearch.bind(this)}>搜索</button>
                 </div> */}
                 {result}
-                <Pagination className='searchPag' defaultCurrent={1} total={500} />
+                <Pagination className='searchPag' defaultCurrent={1} total={this.state.total} pageSize={25} onChange={(page, pageSize)=>this.pageChange(page, pageSize)} />
             </div>
         )
     }

@@ -1,7 +1,7 @@
 export default (state, action) => {
   console.log(action)
   state = action.type;
-  return state
+  return action
   // switch (action.type) {
   //   case 'INCREMENT':
   //     state = 
