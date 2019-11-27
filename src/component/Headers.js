@@ -39,6 +39,7 @@ class SearchInput extends Component {
         this.state = {
             search: '',
             inputValue: '',
+            index:'',
         };
     }
     inputChange(e) {
@@ -90,7 +91,7 @@ class Headers extends Component {
         this.state = {
             search: '',
             inputValue: '苏打绿',
-            total:0
+            total:0,
         };
     }
    
@@ -137,6 +138,11 @@ class Headers extends Component {
             musicUrl: url
         })
     }
+    selected(e){
+        this.setState({
+            index: Number(e.currentTarget.getAttribute('index'))
+        })
+    }
     render() {
         let result = [
             <div className='flex musicHeader' key='1'>
@@ -155,13 +161,11 @@ class Headers extends Component {
         
         if (this.state.search) {
             console.log(this.state.search.songs)
-            this.state.search.songs.forEach(i => {
+            var that = this
+            this.state.search.songs.forEach((i,index) => {
                 result.push(
-                    <div className='flex' key={i.id} onClick={()=> this.playTheMusic(i.id)}>
-                        <div className='musicName'>
-                            <a href={'https://music.163.com/song/media/outer/url?id=' + i.id + '.mp3'} title={i.name}>{i.name}</a>
-                            
-                        </div>
+                    <div className={'flex ' + (that.state.index === index ? 'colorfff' :'colorF0F2F5')} key={i.id} index={index} ref='refseesee' onClick={(e) => this.selected(e)} onDoubleClick={()=> this.playTheMusic(i.id)}>
+                         <div className='musicName' title={i.name}>{i.name}</div>
                         {i.mvid !== 0 ? <MV mvid={i.mvid} /> : <div className='mv'></div>}
                         <div className='artistsName' title={i.artists[0].name}>
                             {i.artists[0].name}

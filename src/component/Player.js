@@ -12,21 +12,23 @@ class Player extends Component {
     }
     componentDidMount() {
         store.subscribe(listener);
-        var that = this;
+        // var that = this;
         function listener(){
             if (store.getState().type === "musicUrl"){
                 console.log(store.getState().musicUrl);
-                that.setState({
-                    src: store.getState().musicUrl
-                })
+                // that.setState({
+                //     'src': store.getState().musicUrl
+                // })
+                let audio = document.querySelector("#music")
+                audio.src = store.getState().musicUrl;
+                audio.play()
             }
         }
     }
     render() {
         return (
              <div>
-                <audio controls="controls">
-                    <source src={this.state.src} />1
+                <audio controls="controls" id='music' >
                 </audio>
              </div>
         );

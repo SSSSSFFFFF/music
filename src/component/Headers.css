@@ -57,3 +57,15 @@
     transform: translateY(-50%);
     left: 210px;
 }
+
+.colorfff {
+    background: #fff;
+}
+
+.colorF0F2F5 {
+    background: #F0F2F5;
+}
+
+.ant-layout-footer {
+    padding:0 0px;
+}
