@@ -2,9 +2,9 @@ import { Input, Icon, Pagination   } from 'antd';
 import React, { Component } from 'react';
 import '../index.css';
 import './Headers.css';
-import counter from '../reducers'
+import data from '../reducers'
 import { createStore } from 'redux'
-const store = createStore(counter)
+const store = createStore(data)
 
 // const request = require('request');
 class MV extends Component {
@@ -12,7 +12,6 @@ class MV extends Component {
         super(props);
         this.state = {
             mvUrl: '',
-            
         };
     }
     componentDidMount(){
@@ -23,7 +22,6 @@ class MV extends Component {
                     mvUrl: res.data.url,
                 })
             })
-           
     }
     render(){
         return (
@@ -56,7 +54,8 @@ class SearchInput extends Component {
         }).then(res => {
             console.log(res.result)
             store.dispatch({ 
-                type: res.result,
+                type: 'searchApi',
+                result: res.result,
                 inputValue: inputValue
             })
             this.setState({
@@ -116,17 +115,27 @@ class Headers extends Component {
         var that = this;
         function listener() {
             // console.log(store.getState());
-            that.setState({
-                search: store.getState().type,
-                total: store.getState().type.songCount,
-                inputValue: store.getState().inputValue
-            })
+            if (store.getState().type === 'searchApi'){
+                that.setState({
+                    search: store.getState().result,
+                    total: store.getState().result.songCount,
+                    inputValue: store.getState().inputValue
+                })
+            }
+            
         }
-        
     }
     pageChange(page, pageSize){
         // console.log(page, pageSize);
         this.fetchApi(this.state.inputValue, 25*(page-1))
+    }
+    playTheMusic(id){
+        // console.log(id);
+        let url = 'https://music.163.com/song/media/outer/url?id=' + id + '.mp3'
+        store.dispatch({
+            type:"musicUrl",
+            musicUrl: url
+        })
     }
     render() {
         let result = [
@@ -148,7 +157,7 @@ class Headers extends Component {
             console.log(this.state.search.songs)
             this.state.search.songs.forEach(i => {
                 result.push(
-                    <div className='flex' key={i.id}>
+                    <div className='flex' key={i.id} onClick={()=> this.playTheMusic(i.id)}>
                         <div className='musicName'>
                             <a href={'https://music.163.com/song/media/outer/url?id=' + i.id + '.mp3'} title={i.name}>{i.name}</a>
                             
@@ -179,4 +188,4 @@ class Headers extends Component {
         )
     }
 }
-export { Headers, SearchInput}
+export { Headers, SearchInput,store}

@@ -1,23 +1,32 @@
 import React, { Component } from 'react';
-// import '../index.css';
 import './Player.css';
-// import counter from '../reducers'
-// import { createStore } from 'redux'
-// const store = createStore(counter)
+import {store}  from './Headers'
 
 // const request = require('request');
 class Player extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            'todo': '',
+            'src': '',
         };
+    }
+    componentDidMount() {
+        store.subscribe(listener);
+        var that = this;
+        function listener(){
+            if (store.getState().type === "musicUrl"){
+                console.log(store.getState().musicUrl);
+                that.setState({
+                    src: store.getState().musicUrl
+                })
+            }
+        }
     }
     render() {
         return (
              <div>
                 <audio controls="controls">
-                    <source src="" />1
+                    <source src={this.state.src} />1
                 </audio>
              </div>
         );

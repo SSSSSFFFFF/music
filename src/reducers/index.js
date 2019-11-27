@@ -1,13 +1,14 @@
 export default (state, action) => {
-  state = action.type;
-  return action
+  console.log(action);
+  // state = 'something error'
   // switch (action.type) {
-  //   case 'INCREMENT':
-  //     state = 
-  //     return state + 1
-  //   case 'DECREMENT':
-  //     return state - 1
+  //   case 'musicUrl':
+  //     state = action.musicUrl
+  //     return state
+  //   case "searchApi":
+  //     return action
   //   default:
   //     return state
   // }
+  return action
 }
