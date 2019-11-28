@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../index.css';
 import './Lyric.css';
 import { store } from './Headers'
-
+import {AxiosGet} from './Axios'
 class Lyric extends Component {
     constructor(props) {
         super(props);
@@ -17,6 +17,9 @@ class Lyric extends Component {
         function listener() {
             if (store.getState().type === "musicUrl"){
                 let id = store.getState().musicId
+               AxiosGet('/lyric?id=' + id).then(res=>{
+                    console.log(res);
+                })
             }
         }
     }
