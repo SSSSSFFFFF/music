@@ -1,0 +1,8 @@
+.musicLyricPre {
+    /* transform: translateY(-100px); */
+}
+
+.musicLyric {
+    height: 300px;
+    overflow: hidden;
+}

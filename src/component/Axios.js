@@ -4,7 +4,7 @@ function AxiosGet(url) {
     return new Promise((resolve, reject) => {
         axios.get(host+url)
             .then(res => {
-                resolve(res)
+                resolve(res.data)
             })
             .catch(err => {
                 reject(err);

@@ -28,7 +28,7 @@ class Player extends Component {
     render() {
         return (
              <div>
-                <audio controls="controls" id='music' >
+                <audio controls="controls" id='music'>
                 </audio>
              </div>
         );
