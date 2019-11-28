@@ -135,7 +135,8 @@ class Headers extends Component {
         let url = 'https://music.163.com/song/media/outer/url?id=' + id + '.mp3'
         store.dispatch({
             type:"musicUrl",
-            musicUrl: url
+            musicUrl: url,
+            musicId:id
         })
     }
     selected(e){
@@ -181,7 +182,7 @@ class Headers extends Component {
 
 
         return (
-            <div>
+            <div className="musicLists">
                 {/* <div>
                     <input type="text" onChange={this.inputChange.bind(this)} placeholder='苏打绿' />
                     <button onClick={this.toSearch.bind(this)}>搜索</button>

@@ -35,3 +35,15 @@ code {
   right: 0;
   top: 0;
 }
+
+.musicLists {
+  width: 50%;
+}
+
+.musicLyric {
+  width: 50%;
+}
+
+.ant-layout-content {
+  display: flex;
+}

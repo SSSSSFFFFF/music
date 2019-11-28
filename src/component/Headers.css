@@ -1,5 +1,9 @@
 .flex div {
-    margin: 0 10px
+    /* margin: 0 10px */
+}
+
+.album {
+    width: 500px;
 }
 
 .ant-layout-header {
@@ -10,8 +14,8 @@
     background: #f0f2f5;
 }
 
-.musicName, .artistsName {
-    width: 150px;
+.musicName, .artistsName,.album {
+    width: 200px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -31,7 +35,7 @@
 }
 
 .mv {
-    width: 10px;
+    width: 50px;
 }
 
 .singerTitle {
@@ -67,5 +71,5 @@
 }
 
 .ant-layout-footer {
-    padding:0 0px;
+    padding: 0 0px;
 }

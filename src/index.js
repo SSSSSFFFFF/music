@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { Headers, SearchInput } from './component/Headers';
+import Lyric from './component/Lyric'
 import Player from './component/Player';
 import Login from './Login';
 import * as serviceWorker from './serviceWorker';
@@ -33,7 +34,8 @@ class App extends Component {
                         <Layout>
                             <Sider>Sider</Sider>
                             <Content>
-                                <Headers />
+                                <Headers  />
+                                <Lyric />
                             </Content>
                         </Layout>
                         <Footer>
